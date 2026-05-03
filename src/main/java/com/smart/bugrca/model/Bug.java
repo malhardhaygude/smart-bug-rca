@@ -36,6 +36,12 @@ public class Bug {
     @Column(name = "root_cause", columnDefinition = "text")
     private String rootCause;
 
+    @Column(name = "impact", columnDefinition = "text")
+    private String impact;
+
+    @Column(name = "resolution", columnDefinition = "text")
+    private String resolution;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BugStatus status;

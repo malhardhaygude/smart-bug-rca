@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class BugController {
     private final BugService bugService;
 
-    @Operation(summary = "Create a new incident with AI-powered RCA")
+    @Operation(summary = "Create a new bug with AI-powered RCA")
     @PostMapping
     public BugResponse createBug(@RequestBody BugRequest bugRequest){
         Bug bug = new Bug();
@@ -67,7 +67,8 @@ public class BugController {
     private BugResponse mapToResponse(Bug bug) {
          return new BugResponse(
                  bug.getId(),bug.getBugId(),bug.getDescription(),bug.getSeverity(),
-                 bug.getRootCause(),bug.getStatus(),bug.getCreatedTime(),bug.getResolvedTime()
+                 bug.getRootCause(),bug.getImpact(),bug.getResolution(),
+                 bug.getStatus(),bug.getCreatedTime(),bug.getResolvedTime()
          );
     }
 

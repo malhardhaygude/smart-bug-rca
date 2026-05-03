@@ -4,6 +4,7 @@ import com.smart.bugrca.llm.LlmService;
 import com.smart.bugrca.model.Bug;
 import com.smart.bugrca.model.BugStatus;
 import com.smart.bugrca.repository.BugRepository;
+import com.smart.bugrca.utility.RcaSections;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class BugService {
 
     private final BugRepository bugRepository;
     private final LlmService llmService;
+    private final RcaSections rcaSections;
 
     //Create Bug with Rule-based + AI RCA
     public Bug createBug(
@@ -37,7 +39,10 @@ public class BugService {
                     environment,
                     symptoms
             );
-            bug.setRootCause(aiRca);
+            rcaSections.setRacVariables(aiRca);
+            bug.setRootCause(rcaSections.getRca());
+            bug.setImpact(rcaSections.getImpact());
+            bug.setResolution(rcaSections.getResolution());
         } catch (Exception e) {
             // fallback RCA remains
             System.out.println("Exception: "+ e);

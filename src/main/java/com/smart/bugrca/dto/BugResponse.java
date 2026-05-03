@@ -10,6 +10,8 @@ public record BugResponse(
         String description,
         String severity,
         String rootCause,
+        String impact,
+        String resolution,
         BugStatus status,
         LocalDateTime createdTime,
         LocalDateTime resolvedTime

@@ -18,7 +18,6 @@ public class BugService {
 
     private final BugRepository bugRepository;
     private final LlmService llmService;
-    private final RcaSections rcaSections;
 
     //Create Bug with Rule-based + AI RCA
     public Bug createBug(
@@ -39,7 +38,7 @@ public class BugService {
                     environment,
                     symptoms
             );
-            rcaSections.setRacVariables(aiRca);
+            RcaSections rcaSections = RcaSections.parse(aiRca);
             bug.setRootCause(rcaSections.getRca());
             bug.setImpact(rcaSections.getImpact());
             bug.setResolution(rcaSections.getResolution());
